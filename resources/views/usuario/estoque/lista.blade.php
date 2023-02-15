@@ -1,0 +1,135 @@
+@extends('tamplate.main')
+@section('ativo-estoque','active')
+@section('titulo', 'Estoque')
+@section('caminho', 'Menu')
+@section('atual-page', 'Estoque')
+@push('sidbar')
+    @include('usuario.partial.sidbar')
+@endpush
+@push('navbar')
+    @include('usuario.partial.navbar')
+@endpush
+@section('conteudo')
+
+    <div class="container-fluid py-4" style="bottom: 100px;">
+
+        <div class="row">
+            <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+                <div class="card">
+                    <div class="card-body p-3">
+                        <div class="row">
+                            <div class="col-8">
+                                <div class="numbers">
+                                    <p class="text-sm mb-0 text-uppercase font-weight-bold">Estoque</p>
+                                    <h5 class="font-weight-bolder">
+                                     {{ $contador }}
+                                    </h5>
+                                    {{-- <p class="mb-0">
+                        <span class="text-success text-sm font-weight-bolder">+55%</span>
+                        since yesterday
+                      </p> --}}
+                                </div>
+                            </div>
+                            <div class="col-4 text-end">
+                                <div class="icon icon-shape bg-gradient-primary shadow-primary text-center rounded-circle">
+                                    <i class="ni ni-money-coins text-lg opacity-10" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card" style="margin-top: 200px;">
+            <div class="card-header pb-0 p-3">
+                <div class="d-flex justify-content-between">
+                    <h6 class="mb-2">Produtos em estoque</h6>
+                </div>
+            </div>
+            <div class="table-responsive">
+                <table class="table align-items-center mb-0">
+                    <thead>
+                        <tr>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Codigo</th>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Produto
+                            </th>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                               Codigo de barra</th>
+                               <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                Estoque</th>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                Preço de venda</th>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                Preço de custo</th>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                Total preço venda</th>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                Total preço custo</th>
+                            <th class="text-secondary opacity-7"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($estoque as $item)
+                            <tr>
+                                <td>
+                                    <div class="d-flex px-2 py-1">
+                                        <div>
+                                            <img src="{{ asset('/img/img-default.png')}}"
+                                                class="avatar avatar-sm me-3">
+                                        </div>
+                                        <div class="d-flex flex-column justify-content-center">
+                                            <h6 class="mb-0 text-xs">Codigo</h6>
+                                            <p class="text-xs text-secondary mb-0">{{ $item->codigo }}</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <p class="text-xs font-weight-bold mb-0">Produto</p>
+                                    <p class="text-xs text-secondary mb-0">{{strtolower($item->produto)}}</p>
+                                </td>
+                                <td>
+                                    <p class="text-xs font-weight-bold mb-0">Codigo de barras</p>
+                                    <p class="text-xs text-secondary mb-0">{{$item->codigobarra}}</p>
+                                </td>
+                                <td>
+                                    <p class="text-xs font-weight-bold mb-0">Estoque</p>
+                                    <p class="text-xs text-secondary mb-0">{{$item->estoque}}</p>
+                                </td>
+                                <td>
+                                    <p class="text-xs font-weight-bold mb-0"> Preço de venda</p>
+                                    <p class="text-xs text-secondary mb-0">R$ {{ number_format($item->precovenda,2,',','.')}}</p>
+                                </td>
+                                <td>
+                                    <p class="text-xs font-weight-bold mb-0"> Preço de custo</p>
+                                    <p class="text-xs text-secondary mb-0">R$ {{ number_format($item->precocusto,2,',','.')}}</p>
+                                </td>
+                                <td>
+                                    <p class="text-xs font-weight-bold mb-0">Total preço venda</p>
+                                    <p class="text-xs text-secondary mb-0">R$ {{ number_format($item->precovenda * $item->estoque,2,',','.')}}</p>
+                                </td>
+                                <td>
+                                    <p class="text-xs font-weight-bold mb-0">Total preço custo</p>
+                                    <p class="text-xs text-secondary mb-0">R$ {{ number_format($item->precocusto * $item->estoque,2,',','.')}}</p>
+                                </td>
+                                {{-- <td class="align-middle text-center">
+                                    <span class="text-secondary text-xs font-weight-bold">23/04/18</span>
+                                </td> --}}
+                                <td class="align-middle">
+                                    <a href="javascript:;" class="text-secondary font-weight-bold text-xs"
+                                        data-toggle="tooltip" data-original-title="Edit user">
+                                        Detalhes
+                                    </a>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+            <div class="d-flex me-2 justify-content-center mt-5">
+                {!! $estoque->links() !!}
+            </div>
+        </div>
+        @include('tamplate.footer')
+    </div>
+   
+@endsection
