@@ -46,7 +46,8 @@ class DatabaseRepositorio
             $conn = $this->Conn();
             if (!is_null($conn)) {
 
-                $sql = "CREATE DATABASE IF NOT EXISTS $instancia CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;";
+                $sql = "CREATE DATABASE IF NOT EXISTS $instancia CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;set global net_buffer_length=1000000; 
+                set global max_allowed_packet=1000000000;";
                 $conn->beginTransaction();
                 $banco = $conn->exec($sql);
 

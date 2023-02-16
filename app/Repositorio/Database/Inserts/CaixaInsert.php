@@ -20,6 +20,8 @@ class CaixaInsert
 
     public function insert($caixa)
     {
+
+        //return $this->prepareInsertSQL($caixa);
         try {
             $sql = $this->prepareInsertSQL($caixa);
             $conn = $this->conection($caixa['config']['db_instancia']);
@@ -49,9 +51,19 @@ class CaixaInsert
             $dado['SAIDA'] = !empty($dado['SAIDA']) ? ($dado['SAIDA']) : 0;
             $dado['CODNFSAIDA'] = !empty($dado['CODNFSAIDA']) ?  $dado['CODNFSAIDA'] : 'SEM NF';
             $dado['CODIGO_VENDA'] = !empty($dado['CODIGO_VENDA']) ?  $dado['CODIGO_VENDA'] : 'SEM CODIGO';
+            $dado['HISTORICO'] = !empty($dado['HISTORICO']) ? str_replace('"',"'",$dado['HISTORICO']) : "'"; //!empty($dado['HISTORICO']) ?  $dado['HISTORICO'] : 'SEM DADOS';
+            $dado['MOVIMENTO'] = !empty($dado['MOVIMENTO']) ?  $dado['MOVIMENTO'] : 0;
+            $dado['CODNFSAIDA'] = !empty($dado['CODNFSAIDA']) ?  $dado['CODNFSAIDA'] : 'SEM DADOS';
+            $dado['POSTO'] = !empty($dado['POSTO']) ?  $dado['POSTO'] : 0;
+            $dado['CODIGO_VENDA'] = !empty($dado['CODIGO_VENDA']) ?  $dado['CODIGO_VENDA'] : 0;
+            $dado['HORA'] = !empty($dado['HORA']) ?  $dado['HORA'] : 0;
+
+
+
+
 
             $values .= "('{$dado['CODIGO']}','{$dado['CODCAIXA']}','{$dado['CODOPERADOR']}','{$dado['DATA']}',{$dado['SAIDA']},{$dado['ENTRADA']},
-                         '{$dado['CODCONTA']}','{$dado['HISTORICO']}',{$dado['MOVIMENTO']},{$dado['VALOR']},'{$dado['CODNFSAIDA']}',{$dado['POSTO']},'{$dado['CODIGO_VENDA']}','{$dado['HORA']}'),";
+                         '{$dado['CODCONTA']}',".'"'.$dado['HISTORICO'].'"' .",{$dado['MOVIMENTO']},{$dado['VALOR']},'{$dado['CODNFSAIDA']}',{$dado['POSTO']},'{$dado['CODIGO_VENDA']}','{$dado['HORA']}'),";
         }
 
         return   $sql . rtrim($values, ',') . ";";

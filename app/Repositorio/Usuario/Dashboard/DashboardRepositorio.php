@@ -31,6 +31,6 @@ class DashboardRepositorio
     }
     public function contadorTotalVendas(){
         $this->venda->setInstancia(session()->get('db_instancia'));
-        return $this->venda->sum('total_nota');
+        return $this->venda->where('data',date('Y-m-d'))->sum('total_nota');
     }
 }
