@@ -69,7 +69,7 @@
       <div class="col-lg-12 mb-lg-0 mb-4">
         <div class="card z-index-2 h-100">
           <div class="card-header pb-0 pt-3 bg-transparent">
-            <h6 class="text-capitalize">Vendas (Por Mês)</h6>
+            <h6 class="text-capitalize">Quantidade de vendas por mês (Ano {{ date('Y')}})</h6>
             {{-- <p class="text-sm mb-0">
               <i class="fa fa-arrow-up text-success"></i>
               <span class="font-weight-bold">4% more</span> in 2021
@@ -261,9 +261,9 @@
     new Chart(ctx1, {
       type: "line",
       data: {
-        labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+        labels: ["Jan","Fev","Mar","Abr", "Mai", "Jun", "Jul", "Aug", "Set", "Out", "Nov", "Dez"],
         datasets: [{
-          label: "Mobile apps",
+          label: "Vendas",
           tension: 0.4,
           borderWidth: 0,
           pointRadius: 0,
@@ -271,7 +271,7 @@
           backgroundColor: gradientStroke1,
           borderWidth: 3,
           fill: true,
-          data: [50, 40, 300, 220, 500, 250, 400, 230, 500],
+          data: [10,23,0,50, 40, 300, 220, 500, 250, 400, 230, 500],
           maxBarThickness: 6
 
         }],
