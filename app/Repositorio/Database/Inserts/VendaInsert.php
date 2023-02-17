@@ -61,7 +61,7 @@ class VendaInsert
     protected function prepareInsertSQL($vendas)
     {
         $sql = "
-            insert into vendas(codproduto,qtde,unitario,subtotal,desconto,codigo,codnota,codcaixa,cfop,codcliente,codfilial,data,meio_dinheiro,meio_cartaodeb,meio_cartaocred,meio_chequeap,meio_chequeav,meio_crediario,meio_outros,troco,valor_recebido,valor_produtos,total_nota)values
+            insert into vendas(total,codproduto,qtde,unitario,subtotal,desconto,codigo,codnota,codcaixa,cfop,codcliente,codfilial,data,meio_dinheiro,meio_cartaodeb,meio_cartaocred,meio_chequeap,meio_chequeav,meio_crediario,meio_outros,troco,valor_recebido,valor_produtos,total_nota)values
         ";
 
         $values = '';
@@ -72,7 +72,7 @@ class VendaInsert
             $dado['UNITARIO'] = empty($dado['UNITARIO']) ? 0 : $dado['UNITARIO'];
             $dado['SUBTOTAL'] = empty($dado['SUBTOTAL']) ? 0 : $dado['SUBTOTAL'];
             $dado['UNITARIO'] = empty($dado['UNITARIO']) ? 0 : $dado['UNITARIO'];
-            $dado['TOTAL'] = empty($dado['TOTAL']) ? 0 : $this->parse_money($dado['TOTAL']);
+            $dado['TOTAL'] = empty($dado['TOTAL']) ? 0 : ($dado['TOTAL']);
             $dado['DESCONTO'] = empty($dado['DESCONTO']) ? 0 : $this->parse_money($dado['DESCONTO']);
             $dado['MEIO_DINHEIRO'] = empty($dado['MEIO_DINHEIRO']) ? 0 : $this->parse_money($dado['MEIO_DINHEIRO']);
             $dado['MEIO_CREDIARIO'] = empty($dado['MEIO_CREDIARIO']) ? 0 : $this->parse_money($dado['MEIO_CREDIARIO']);
@@ -87,7 +87,7 @@ class VendaInsert
             $dado['TOTAL_NOTA'] = empty($dado['TOTAL_NOTA']) ? 0 : $this->parse_money($dado['TOTAL_NOTA']);
 
 
-            $values .= "('{$dado['CODPRODUTO']}',{$dado['QTDE']},{$dado['UNITARIO']},{$dado['SUBTOTAL']},
+            $values .= "({$dado['TOTAL']},'{$dado['CODPRODUTO']}',{$dado['QTDE']},{$dado['UNITARIO']},{$dado['SUBTOTAL']},
              {$dado['DESCONTO']},'{$dado['CODIGO']}','{$dado['CODNOTA']}','{$dado['CODCAIXA']}','{$dado['CFOP']}','{$dado['CODCLIENTE']}',
             '{$dado['CODFILIAL']}','{$dado['DATA']}',{$dado['MEIO_DINHEIRO']},{$dado['MEIO_CARTAODEB']},{$dado['MEIO_CARTAOCRED']},{$dado['MEIO_CHEQUEAP']},
               {$dado['MEIO_CHEQUEAV']},{$dado['MEIO_CREDIARIO']},{$dado['MEIO_OUTROS']},{$dado['TROCO']},{$dado['VALOR_RECEBIDO']},{$dado['VALOR_PRODUTOS']},{$dado['TOTAL_NOTA']}),";
