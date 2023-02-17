@@ -20,15 +20,15 @@ class CaixaRepositorio
         $this->caixa = new Caixa();
     }
 
-    public function caixa()
+    protected function db_conection()
     {
-        $this->caixa->setInstancia(session()->get('db_instancia'));
-        //return $this->caixa->where('id',1)->get();
-        return DB::connection('mysql2')->table('estoques')->select('*')->get();
+        return $this->caixa->setInstancia(session()->get('db_instancia'));
     }
-    public function cadastro($caixa)
+
+    public function lista()
     {
-         return $caixa;
+        $this->db_conection();
+        return $this->caixa->orderBy('id', 'DESC')->paginate(9);
     }
-    
+
 }

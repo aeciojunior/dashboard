@@ -14,12 +14,16 @@ class CaixaController extends Controller
 
     public function __construct()
     {
+        $this->prefix = 'user';
+        $this->path = 'usuario.caixa';
         $this->caixaRepositorio = new CaixaRepositorio();
     }
 
     public function getLista()
     {
        
-        dd($this->caixaRepositorio->caixa());
+       
+        return view($this->path.'.lista',['caixa' => $this->caixaRepositorio->lista(),'contador'=>0]);
+
     }
 }

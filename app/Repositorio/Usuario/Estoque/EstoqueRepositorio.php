@@ -14,13 +14,18 @@ class EstoqueRepositorio
         $this->estoque = new Estoque();
     }
 
+    protected function db_conection()
+    {
+        return $this->estoque->setInstancia(session()->get('db_instancia'));
+    }
+
     public function lista()
     {
-        $this->estoque->setInstancia(session()->get('db_instancia'));
-        return $this->estoque->paginate(9);
+        $this->db_conection();
+        return $this->estoque->orderBy('id', 'DESC')->paginate(9);
     }
     public function contador(){
-        $this->estoque->setInstancia(session()->get('db_instancia'));
+        $this->db_conection();
         return $this->estoque->count('id');
     }
 }
