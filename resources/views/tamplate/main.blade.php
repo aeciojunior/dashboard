@@ -20,6 +20,15 @@
     <link href="{{ asset('css/nucleo-svg.css') }}" rel="stylesheet" />
     <!-- CSS Files -->
     <link id="pagestyle" href="{{ asset('css/argon-dashboard.css?v=2.0.4') }}" rel="stylesheet" />
+    <style>
+        .async-hide {
+          opacity: 0 !important
+        }
+      </style>
+      
+
+
+
 </head>
 
 @if (auth()->hasUser() && session()->get('cnpj_loja'))
@@ -65,7 +74,7 @@
 
     <body>
         @yield('conteudo')
-       
+
         @include('tamplate.javascript')
         <script src="{{ asset('js/sweetalert.min.js')}}"></script>
         @if (Session::has('msg-error'))
@@ -93,7 +102,7 @@
             </script>
         @endif
     </body>
-    
+
 @endif
 
 </html>
