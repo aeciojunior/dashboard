@@ -47,26 +47,63 @@ class DashboardRepositorio
 
     public function grafico()
     {
-        $this->db_conection($this->venda);
-        return $this->meses();
+        $arr = [
+            'meses' => $this->messes(),
+            'valor' => $this->TotalMesses()
+        ];
+
+        return $arr;
     }
 
-    protected  function meses()
+    protected  function messes()
     {
 
 
         $busca = $this->db::connection('mysql2')->select('SELECT CONCAT(month(data)) mes, COUNT(id) qtde, year(data)
-        FROM vendas where year(data) = 2022
+        FROM vendas where year(data) = 2019
         GROUP BY YEAR(data), MONTH(data);');
         $valor = '';
 
-        foreach($busca as $key)
-        {
-           $valor .= $key->qtde.',';
+        for ($i=0; $i <= 12 ; $i++) {
+            if(empty($busca[$i]->qtde)){
+                $valor .= '0'.',';
+            }else{
+                $valor .= $busca[$i]->qtde.',';
+            }
         }
+
+        // foreach($busca as $key)
+        // {
+        //    $valor .= $key->qtde.',';
+        // }
 
         return '['. rtrim($valor,','). ']';
 
+    }
+
+    protected  function TotalMesses()
+    {
+
+
+        $busca = $this->db::connection('mysql2')->select('SELECT CONCAT(month(data)) mes, COUNT(id) qtde, year(data),sum(total) as total
+        FROM vendas where year(data) = 2019
+        GROUP BY YEAR(data), MONTH(data);');
+        $valor = '';
+
+        for ($i=0; $i <= 12 ; $i++) {
+            if(empty($busca[$i]->total)){
+                $valor .= '0'.',';
+            }else{
+                $valor .= $busca[$i]->total.',';
+            }
+        }
+
+        // foreach($busca as $key)
+        // {
+        //    $valor .= $key->total.',';
+        // }
+
+        return '['. rtrim($valor,','). ']';
 
     }
 }

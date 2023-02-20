@@ -23,6 +23,12 @@ class DashboardController extends Controller
     public function dashboard()
     {
 
-        return view( $this->path.'dashboard/dashboard',['estoque'=>$this->dashboardRepositorio->contadorEstoque(),'venda' => $this->dashboardRepositorio->contadorTotalVendas(),'grafico' => $this->dashboardRepositorio->grafico()]);
+        return view($this->path . 'dashboard/dashboard',
+        [
+            'estoque' => $this->dashboardRepositorio->contadorEstoque(),
+            'venda' => $this->dashboardRepositorio->contadorTotalVendas(),
+            'meses' => $this->dashboardRepositorio->grafico()['meses'],
+            'valor' => $this->dashboardRepositorio->grafico()['valor']
+        ]);
     }
 }
