@@ -28,7 +28,7 @@ class CaixaRepositorio
     public function lista()
     {
         $this->db_conection();
-        return $this->caixa->where('data','>=','ORDER BY YEAR(data) ASC, MONTH(data) ASC, DAY(data) ASC')->paginate(9);
+       return $this->caixa->orderBy('data','desc')->paginate(9);
     }
 
 }

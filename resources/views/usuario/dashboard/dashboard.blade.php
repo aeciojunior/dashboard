@@ -12,7 +12,7 @@
 @endpush
 
 @section('conteudo')
-   
+
 <div class="container-fluid py-4">
     <div class="row">
       <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
@@ -82,7 +82,7 @@
           </div>
         </div>
       </div>
-    
+
     </div>
     <div class="row mt-4">
       <div class="col-lg-8 mb-lg-0 mb-4">
@@ -271,7 +271,7 @@
           backgroundColor: gradientStroke1,
           borderWidth: 3,
           fill: true,
-          data: [10,23,0,50, 40, 300, 220, 500, 250, 400, 230, 500],
+          data: <?php echo $grafico;?>,
           maxBarThickness: 6
 
         }],
