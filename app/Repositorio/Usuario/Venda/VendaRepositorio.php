@@ -13,11 +13,14 @@ class VendaRepositorio
 {
     protected $database;
     protected $venda;
+    protected $db;
 
     public function __construct()
     {
         $this->database = new DatabaseRepositorio();
         $this->venda = new Venda();
+        $this->db = new DB();
+
     }
 
     protected function db_conection()

@@ -13,11 +13,13 @@ class CaixaRepositorio
 {
     protected $database;
     protected $caixa;
+    protected $db;
 
     public function __construct()
     {
         $this->database = new DatabaseRepositorio();
         $this->caixa = new Caixa();
+        $this->db = new DB();
     }
 
     protected function db_conection()
@@ -25,6 +27,7 @@ class CaixaRepositorio
         return $this->caixa->setInstancia(session()->get('db_instancia'));
     }
 
+    
     public function lista()
     {
         $this->db_conection();

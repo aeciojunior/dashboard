@@ -81,6 +81,13 @@ class DashboardRepositorio
 
     }
 
+    public function ultimaAtualizacao()
+    {
+        $this->db_conection($this->venda);
+        $busca = $this->db::connection('mysql2')->select('select created_at as data from vendas limit 1');
+        return $busca[0]->data;
+    }
+
     protected  function TotalMesses()
     {
 

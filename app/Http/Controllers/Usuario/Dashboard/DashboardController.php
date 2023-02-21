@@ -22,13 +22,20 @@ class DashboardController extends Controller
 
     public function dashboard()
     {
+        //dd($this->dashboardRepositorio->ultimaAtualizacao());
 
         return view($this->path . 'dashboard/dashboard',
         [
             'estoque' => $this->dashboardRepositorio->contadorEstoque(),
             'venda' => $this->dashboardRepositorio->contadorTotalVendas(),
             'meses' => $this->dashboardRepositorio->grafico()['meses'],
-            'valor' => $this->dashboardRepositorio->grafico()['valor']
+            'valor' => $this->dashboardRepositorio->grafico()['valor'],
         ]);
+    }
+
+    public function ultimaAutalizacao(){
+        return response(['data' =>
+         $this->dashboardRepositorio->ultimaAtualizacao()]);
+
     }
 }
