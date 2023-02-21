@@ -74,11 +74,11 @@
 
 @push('javascript')
     <script>
+       setTimeout(
         $(document).ready(function() {
             $.get("{{ route('ultimo-update') }}", function(data) {
             $('#ultima-atualizacao').text('Ultima atualização ' + new Date(data.data).toLocaleString());
-
             })
-        });
+        }),3000);
     </script>
 @endpush
