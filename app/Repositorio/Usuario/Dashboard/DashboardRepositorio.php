@@ -101,7 +101,7 @@ class DashboardRepositorio
     {
 
 
-        $busca = $this->db::connection('mysql2')->select('SELECT CONCAT(month(data)) mes, COUNT(id) qtde, year(data),sum(total) as total
+        $busca = $this->db::connection('mysql2')->select('SELECT CONCAT(month(data)) mes, COUNT(id) qtde, year(data),sum(total_nota) as total
         FROM vendas where year(data) = 2019
         GROUP BY YEAR(data), MONTH(data);');
         $valor = '';
