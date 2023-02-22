@@ -62,8 +62,4 @@
         </div>
     </section>
 @endsection
-@push('javascript')
-    <script src="{{ asset('js/jquery/jquery-3.6.3.min.js') }}"></script>
-    <script src="{{ asset('js/senha/exibir-senha.js') }}"></script>
-    <script src="{{ asset('js/jquery.mask.js')}}"></script>
-@endpush
+

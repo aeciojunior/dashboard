@@ -40,13 +40,50 @@
                 </div>
             </div>
         </div>
-        <div class="card" style="margin-top: 200px;">
+        <form method="get">
+            <div class="card" style="margin-top: 100px;">
+                <div class="card-header pb-0 p-3">
+                    <div class="d-flex justify-content-between">
+                        <h6 class="mb-2">Buscar venda</h6>
+                    </div>
+                </div>
+                <div class="col-md-5 pb-0 p-3">
+                    <div class="form-group">
+                        Inicio
+                        <div class="input-group input-group-alternative mb-3">
+
+
+                            <input class="form-control form-control-alternative" type="date" name="data_inicio"  value="{{ request()->input('data_inicio')}}" id="example-date-input">
+
+                        </div>
+                         Fim
+                        <div class="input-group input-group-alternative mb-3">
+
+
+                            <input class="form-control form-control-alternative"  name="data_fim" type="date"  value="{{ request()->input('data_fim')}}" id="example-date-input">
+                            <button class="input-group-text" type="submit"><span><i class="ni ni-zoom-split-in"></i>
+                                    Buscar</span></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-5 pb-0 p-3">
+                    <div class="form-group">
+                        <div class="input-group input-group-alternative mb-3">
+                            <a href="{{ route('user-lista-estoque') }}" class="input-group-text" style="color: inherit;">
+                                Atualizar lista</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div class="card" style="margin-top: 100px;">
             <div class="card-header pb-0 p-3">
                 <div class="d-flex justify-content-between">
                     <h6 class="mb-2">Caixa</h6>
                 </div>
             </div>
-            <div class="table-responsive" >
+            <div class="table-responsive">
                 <table class="table align-items-center mb-0" style="overflow: auto;">
                     <thead>
                         <tr>
@@ -94,7 +131,8 @@
                                 </td>
                                 <td>
                                     <p class="text-xs font-weight-bold mb-0">Data</p>
-                                    <p class="text-xs text-secondary mb-0">{{ date('d/m/Y h:i:s',strtotime($item->data)); }}</p>
+                                    <p class="text-xs text-secondary mb-0">{{ date('d/m/Y h:i:s', strtotime($item->data)) }}
+                                    </p>
                                 </td>
                                 <td>
                                     <p class="text-xs font-weight-bold mb-0">Saida</p>
@@ -109,12 +147,12 @@
                                 <td>
                                     <p class="text-xs font-weight-bold mb-0">Codigo conta</p>
                                     <p class="text-xs text-secondary mb-0">
-                                        {{ $item->codconta  }}</p>
+                                        {{ $item->codconta }}</p>
                                 </td>
                                 <td>
                                     <p class="text-xs font-weight-bold mb-0">Historico</p>
                                     <p class="text-xs text-secondary mb-0">
-                                        {{ $item->historico  }}</p>
+                                        {{ $item->historico }}</p>
                                 </td>
                                 {{-- <td class="align-middle text-center">
                                     <span class="text-secondary text-xs font-weight-bold">23/04/18</span>

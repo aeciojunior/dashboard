@@ -8,7 +8,11 @@
                 <li class="breadcrumb-item text-sm text-white active" aria-current="page">@yield('atual-page')</li>
             </ol>
             <h6 class="font-weight-bolder text-white mb-0">@yield('atual-page')</h6><br>
-            <h6 class="font-weight-bolder text-white mb-0" id='ultima-atualizacao'>Atualizando.....</h6>
+            <h6 class="font-weight-bolder text-white mb-0" id='ultima-atualizacao'>
+                <div class="spinner-border" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </h6>
 
         </nav>
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
@@ -42,17 +46,25 @@
        --}}
 
             <li class="nav-item dropdown pe-2 d-flex align-items-center">
-                <p href="javascript:;" style="cursor: default;" class="nav-link text-white p-0" id="dropdownMenuButton" data-bs-toggle="dropdown"
-                    aria-expanded="false">
-                    Loja : <span id="nome-loja">Carregando...</span>
-            </p>
+                <div href="javascript:;" style="cursor: default;" class="nav-link text-white p-0" id="dropdownMenuButton"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+                    Loja : <span id="nome-loja">
+                        <div class="spinner-border tetx-white" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </span>
+                </div>
             </li>
 
             <li class="nav-item dropdown pe-2 d-flex align-items-center">
-                <p href="javascript:;" style="cursor: default;" class="nav-link text-white p-0" id="dropdownMenuButton" data-bs-toggle="dropdown"
-                    aria-expanded="false">
-                    CNPJ : <span id="cnpj-loja">Carregando...</span>
-            </p>
+                <div href="javascript:;" style="cursor: default;" class="nav-link text-white p-0" id="dropdownMenuButton"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+                    CNPJ : <span id="cnpj-loja">
+                        <div class="spinner-border" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </span>
+                </div>
             </li>
 
 
@@ -80,6 +92,14 @@
                 $('#ultima-atualizacao').text('Ultima atualização ' + new Date(data.data).toLocaleString());
                 $('#nome-loja').text(data.nome[0].nome_loja);
                 $('#cnpj-loja').text(data.cnpj[0].cnpj_loja);
+                $('#user-venda-info').text(data.venda.toLocaleString('pt-BR', {
+                    style: 'currency',
+                    currency: 'BRL'
+                }));
+                $('#user-estoque-info').text(data.estoque.toLocaleString('pt-BR', {
+                    minimumFractionDigits: 2
+                }));
+                console.log(data.estoque)
 
             })
         });

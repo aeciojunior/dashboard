@@ -24,4 +24,12 @@ class EstoqueController extends Controller
     {
        return view($this->path.'.lista',['estoque' => $this->estoqueRepositorio->lista(),'contador'=>$this->estoqueRepositorio->contador()]);
     }
+    public function buscarProduto(Request $req)
+    {
+     
+        if($busca = $this->estoqueRepositorio->buscarProduto($req->input('busca_produto'))){
+            return view($this->path.'.lista',['estoque' => $busca,'contador'=>$this->estoqueRepositorio->contador()]);
+        }
+        return redirect()->route('user-lista-estoque')->with('msg-error','Erro ao buscar produto, codigo ou nome não existe!');
+    }
 }

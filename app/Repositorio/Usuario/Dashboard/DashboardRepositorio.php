@@ -62,7 +62,7 @@ class DashboardRepositorio
     protected  function messes()
     {
 
-
+        $this->db_conection($this->venda);
         $busca = $this->db::connection('mysql2')->select('SELECT CONCAT(month(data)) mes, COUNT(id) qtde, year(data)
         FROM vendas where year(data) = 2019
         GROUP BY YEAR(data), MONTH(data);');

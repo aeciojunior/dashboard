@@ -37,4 +37,17 @@ class EstoqueRepositorio
         $busca = $this->db::connection('mysql2')->select('select created_at as data from vendas limit 1');
         return $busca[0]->data;
     }
+
+
+    public function buscarProduto($produto)
+    {
+        $this->db_conection($this->estoque);
+        $busca = $this->estoque->where('produto', 'LIKE', '%'.$produto.'%')
+		->orWhere('codigo', 'LIKE', '%'.$produto.'%')
+		->paginate(5);
+       
+        return  count($busca) >0 ? $busca :  false;
+    
+    }
+
 }

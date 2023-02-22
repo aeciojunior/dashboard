@@ -76,7 +76,7 @@
         @yield('conteudo')
 
         @include('tamplate.javascript')
-        <script src="{{ asset('js/sweetalert.min.js')}}"></script>
+       
         @if (Session::has('msg-error'))
             <script>
                 function error() {

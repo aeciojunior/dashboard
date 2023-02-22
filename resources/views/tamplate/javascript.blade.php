@@ -5,6 +5,7 @@
 <script src="{{ asset('js/plugins/smooth-scrollbar.min.js') }}"></script>
 <script src="{{ asset('js/plugins/chartjs.min.js') }}"></script>
 <script src="{{ asset('js/senha/exibir-senha.js') }}"></script>
+<script src="{{ asset('js/sweetalert.min.js')}}"></script>
 
 
 <script>

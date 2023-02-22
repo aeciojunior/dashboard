@@ -27,8 +27,7 @@ class DashboardController extends Controller
         return view(
             $this->path . 'dashboard/dashboard',
             [
-                'estoque' => $this->dashboardRepositorio->contadorEstoque(),
-                'venda' => $this->dashboardRepositorio->contadorTotalVendas(),
+              
                 'meses' => $this->dashboardRepositorio->grafico()['meses'],
                 'valor' => $this->dashboardRepositorio->grafico()['valor'],
             ]
@@ -42,7 +41,9 @@ class DashboardController extends Controller
             [
                 'data' => $this->dashboardRepositorio->ultimaAtualizacao(),
                 'cnpj' => $this->dashboardRepositorio->lojaInformation('cnpj_loja'),
-                'nome' => $this->dashboardRepositorio->lojaInformation('nome_loja')
+                'nome' => $this->dashboardRepositorio->lojaInformation('nome_loja'),
+                'estoque' => $this->dashboardRepositorio->contadorEstoque(),
+                'venda' => $this->dashboardRepositorio->contadorTotalVendas()
             ]
     );
     }
