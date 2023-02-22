@@ -37,9 +37,12 @@ class DashboardController extends Controller
 
     public function ultimaAutalizacao()
     {
+        
         return response(
             [
-                'data' => $this->dashboardRepositorio->ultimaAtualizacao()
+                'data' => $this->dashboardRepositorio->ultimaAtualizacao(),
+                'cnpj' => $this->dashboardRepositorio->lojaInformation('cnpj_loja'),
+                'nome' => $this->dashboardRepositorio->lojaInformation('nome_loja')
             ]
     );
     }

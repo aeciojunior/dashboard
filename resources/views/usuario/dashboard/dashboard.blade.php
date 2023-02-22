@@ -2,7 +2,7 @@
 
 @section('titulo', 'Dahsboard')
 @section('ativo-dashboard', 'active')
-@section('caminho', 'Pagina')
+@section('caminho', 'Menu')
 @section('atual-page', 'Dahsboard')
 @push('sidbar')
     @include('usuario.partial.sidbar')

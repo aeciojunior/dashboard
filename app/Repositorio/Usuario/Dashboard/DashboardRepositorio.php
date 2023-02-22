@@ -4,6 +4,7 @@ namespace App\Repositorio\Usuario\Dashboard;
 
 use App\Models\Caixa;
 use App\Models\Estoque;
+use App\Models\Loja;
 use Illuminate\Support\Facades\DB;
 use App\Models\Venda;
 
@@ -13,6 +14,7 @@ class DashboardRepositorio
     protected $caixa;
     protected $venda;
     protected $db;
+    protected $loja;
 
 
     public function __construct()
@@ -21,6 +23,8 @@ class DashboardRepositorio
         $this->caixa = new Caixa();
         $this->venda = new Venda();
         $this->db = new DB();
+        $this->loja = new Loja();
+    
     }
 
     protected function db_conection($instancia)
@@ -64,7 +68,7 @@ class DashboardRepositorio
         GROUP BY YEAR(data), MONTH(data);');
         $valor = '';
 
-        for ($i=0; $i <= 12 ; $i++) {
+        for ($i=0; $i <= 11 ; $i++) {
             if(empty($busca[$i]->qtde)){
                 $valor .= '0'.',';
             }else{
@@ -88,6 +92,11 @@ class DashboardRepositorio
         return $busca[0]->data;
     }
 
+    public function lojaInformation($coluna)
+    {
+       return $this->loja->where('cnpj_loja',session()->get('cnpj_loja'))->get([$coluna]);
+    }
+
     protected  function TotalMesses()
     {
 
@@ -97,7 +106,7 @@ class DashboardRepositorio
         GROUP BY YEAR(data), MONTH(data);');
         $valor = '';
 
-        for ($i=0; $i <= 12 ; $i++) {
+        for ($i=0; $i <= 11 ; $i++) {
             if(empty($busca[$i]->total)){
                 $valor .= '0'.',';
             }else{
