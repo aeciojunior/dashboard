@@ -8,7 +8,7 @@
                 <li class="breadcrumb-item text-sm text-white active" aria-current="page">@yield('atual-page')</li>
             </ol>
             <h6 class="font-weight-bolder text-white mb-0">@yield('atual-page')</h6><br>
-            <h6 class="font-weight-bolder text-white mb-0" id='ultima-atualizacao'></h6>
+            <h6 class="font-weight-bolder text-white mb-0" id='ultima-atualizacao'>Atualizando.....</h6>
 
         </nav>
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
@@ -73,7 +73,7 @@
 </nav>
 
 @push('javascript')
-    <script>
+    <script defer>
 
         $(document).ready(function() {
             $.get("{{ route('ultimo-update') }}", function(data) {
