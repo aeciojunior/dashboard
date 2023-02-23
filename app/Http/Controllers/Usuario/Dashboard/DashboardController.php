@@ -43,7 +43,8 @@ class DashboardController extends Controller
                 'cnpj' => $this->dashboardRepositorio->lojaInformation('cnpj_loja'),
                 'nome' => $this->dashboardRepositorio->lojaInformation('nome_loja'),
                 'estoque' => $this->dashboardRepositorio->contadorEstoque(),
-                'venda' => $this->dashboardRepositorio->contadorTotalVendas()
+                'venda' => $this->dashboardRepositorio->contadorTotalVendas(),
+                'caixa' => $this->dashboardRepositorio->contdorCaixa(),
             ]
     );
     }

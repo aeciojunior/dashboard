@@ -21,8 +21,10 @@
                             <div class="col-8">
                                 <div class="numbers">
                                     <p class="text-sm mb-0 text-uppercase font-weight-bold">Caixa</p>
-                                    <h5 class="font-weight-bolder">
-                                        0,00
+                                    <h5 class="font-weight-bolder" id="user-caixa-info">
+                                        <div class="spinner-border tetx-white" role="status">
+                                            <span class="visually-hidden">Loading...</span>
+                                        </div>
                                     </h5>
                                     {{-- <p class="mb-0">
                         <span class="text-success text-sm font-weight-bolder">+55%</span>
@@ -40,44 +42,63 @@
                 </div>
             </div>
         </div>
-        <form method="get">
+        {{ request()->input('data_inicio') }}
+        <form method="get" action="{{ route('user-busca-caixa') }}">
             <div class="card" style="margin-top: 100px;">
                 <div class="card-header pb-0 p-3">
                     <div class="d-flex justify-content-between">
-                        <h6 class="mb-2">Buscar venda</h6>
-                    </div>
-                </div>
-                <div class="col-md-5 pb-0 p-3">
-                    <div class="form-group">
-                        Inicio
-                        <div class="input-group input-group-alternative mb-3">
-
-
-                            <input class="form-control form-control-alternative" type="date" name="data_inicio"  value="{{ request()->input('data_inicio')}}" id="example-date-input">
-
-                        </div>
-                         Fim
-                        <div class="input-group input-group-alternative mb-3">
-
-
-                            <input class="form-control form-control-alternative"  name="data_fim" type="date"  value="{{ request()->input('data_fim')}}" id="example-date-input">
-                            <button class="input-group-text" type="submit"><span><i class="ni ni-zoom-split-in"></i>
-                                    Buscar</span></button>
-                        </div>
+                        <h6 class="mb-2">Buscar caixa</h6>
                     </div>
                 </div>
 
                 <div class="col-md-5 pb-0 p-3">
-                    <div class="form-group">
-                        <div class="input-group input-group-alternative mb-3">
-                            <a href="{{ route('user-lista-estoque') }}" class="input-group-text" style="color: inherit;">
-                                Atualizar lista</a>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                Inicio
+                                <input class="form-control form-control-alternative" type="date" name="data_inicio"
+                                    value="{{ old('data_inicio') }}" id="example-date-input">
+                                @error('data_inicio')
+                                    <div class="error" style="color:red">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                Fim
+
+                                <input class="form-control form-control-alternative" type="date" name="data_fim"
+                                    value="{{ old('data_fim') }}" id="example-date-input">
+                                @error('data_fim')
+                                    <div class="error " style="color:red">{{ $message }}</div>
+                                @enderror
+                            </div>
                         </div>
                     </div>
                 </div>
+                <div class="row col-md-5 pb-0 p-3">
+
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            Codigo
+                            <input type="text" class="form-control form-control-alternative" name="codigo_caixa"
+                                id="exampleFormControlInput1" placeholder="sistema ou caixa ou operador">
+                        </div>
+                    </div>
+                  
+                </div>
+                <div class="col-md-5 pb-0 p-3 me-2">
+                    <div class="form-group">
+                        <button class=" btn btn-primary  active">Buscar</button>
+                        <a href="{{ route('user-lista-caixa') }}" class="btn btn-warning  active">
+                            Atualizar lista</a>
+                    </div>
+                </div>
+
             </div>
         </form>
-        <div class="card" style="margin-top: 100px;">
+        <div class="card" style="margin-top: 50px;">
             <div class="card-header pb-0 p-3">
                 <div class="d-flex justify-content-between">
                     <h6 class="mb-2">Caixa</h6>
@@ -131,7 +152,8 @@
                                 </td>
                                 <td>
                                     <p class="text-xs font-weight-bold mb-0">Data</p>
-                                    <p class="text-xs text-secondary mb-0">{{ date('d/m/Y h:i:s', strtotime($item->data)) }}
+                                    <p class="text-xs text-secondary mb-0">
+                                        {{ date('d/m/Y h:i:s', strtotime($item->data)) }}
                                     </p>
                                 </td>
                                 <td>
@@ -145,7 +167,7 @@
                                         {{ number_format($item->entrada, 2, ',', '.') }}</p>
                                 </td>
                                 <td>
-                                    <p class="text-xs font-weight-bold mb-0">Codigo conta</p>
+                                    <p class="text-xs font-weight-bold mb-0">Codigo nota</p>
                                     <p class="text-xs text-secondary mb-0">
                                         {{ $item->codconta }}</p>
                                 </td>
@@ -169,7 +191,8 @@
                 </table>
             </div>
             <div class="d-flex me-2 justify-content-center mt-5">
-                {!! $caixa->links() !!}
+                {{-- {!! $caixa->links() !!} --}}
+                {{ $caixa->appends(['data_inicio' => request()->input('data_inicio'), 'data_fim' => request()->input('data_fim')])->links() }}
             </div>
         </div>
         @include('tamplate.footer')

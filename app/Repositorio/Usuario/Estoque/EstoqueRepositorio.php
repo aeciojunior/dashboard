@@ -41,7 +41,7 @@ class EstoqueRepositorio
 
     public function buscarProduto($produto)
     {
-        $this->db_conection($this->estoque);
+        $this->db_conection();
         $busca = $this->estoque->where('produto', 'LIKE', '%'.$produto.'%')
 		->orWhere('codigo', 'LIKE', '%'.$produto.'%')
 		->paginate(5);

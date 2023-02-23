@@ -27,11 +27,26 @@ class CaixaRepositorio
         return $this->caixa->setInstancia(session()->get('db_instancia'));
     }
 
-    
+
     public function lista()
     {
         $this->db_conection();
-       return $this->caixa->orderBy('data','desc')->paginate(9);
+        return $this->caixa->orderBy('data', 'desc')->paginate(9);
     }
 
+    public function buscaCaixa($inicio, $fim, $codigo = '')
+    {
+        $busca = '';
+        $this->db_conection();
+        if (!empty($codigo)) {
+            $busca = $this->caixa->where('codigo', 'LIKE', '%' . $codigo . '%')->OrWhere('codcaixa', 'LIKE', '%' . $codigo . '%')
+                ->where('codoperador', 'LIKE', '%' . $codigo . '%')
+                ->paginate(5);
+        } else {
+            $busca = $this->caixa->whereBetween('data', [$inicio . ' 00:00:00', $fim . ' 23:00:00'])
+                ->paginate(9);
+        }
+
+        return  count($busca) > 0 ? $busca :  false;
+    }
 }

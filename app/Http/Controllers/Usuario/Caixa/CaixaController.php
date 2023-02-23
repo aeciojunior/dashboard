@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Usuario\Caixa;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Caixa\CaixaRequest;
 use App\Repositorio\Usuario\Caixa\CaixaRepositorio;
 use Illuminate\Http\Request;
 
@@ -21,9 +22,20 @@ class CaixaController extends Controller
 
     public function getLista()
     {
-       
-       
-        return view($this->path.'.lista',['caixa' => $this->caixaRepositorio->lista(),'contador'=>0]);
+
+        return view($this->path . '.lista', ['caixa' => $this->caixaRepositorio->lista(), 'contador' => 0]);
+    }
+
+    //buscarCaixa
+
+    public function buscarCaixa(CaixaRequest $req)
+    {
+
+      
+        if($busca =  $this->caixaRepositorio->buscaCaixa($req->input('data_inicio'), $req->input('data_fim'),$req->input('codigo_caixa'))){
+            return view($this->path . '.lista', ['caixa' => $busca, 'contador' => 0]);
+        }
+        return redirect()->route('user-lista-caixa')->with('msg-error', 'Não foram encontrados registros durante esse periodo!')->withInput();
 
     }
 }

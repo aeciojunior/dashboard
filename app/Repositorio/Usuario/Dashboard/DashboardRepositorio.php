@@ -24,7 +24,6 @@ class DashboardRepositorio
         $this->venda = new Venda();
         $this->db = new DB();
         $this->loja = new Loja();
-    
     }
 
     protected function db_conection($instancia)
@@ -42,6 +41,12 @@ class DashboardRepositorio
 
         $this->db_conection($this->venda);
         return $this->venda->count('id');
+    }
+
+    public function contdorCaixa()
+    {
+        $this->db_conection($this->caixa);
+        return $this->caixa->sum('valor');
     }
     public function contadorTotalVendas()
     {
@@ -68,11 +73,11 @@ class DashboardRepositorio
         GROUP BY YEAR(data), MONTH(data);');
         $valor = '';
 
-        for ($i=0; $i <= 11 ; $i++) {
-            if(empty($busca[$i]->qtde)){
-                $valor .= '0'.',';
-            }else{
-                $valor .= $busca[$i]->qtde.',';
+        for ($i = 0; $i <= 11; $i++) {
+            if (empty($busca[$i]->qtde)) {
+                $valor .= '0' . ',';
+            } else {
+                $valor .= $busca[$i]->qtde . ',';
             }
         }
 
@@ -81,8 +86,7 @@ class DashboardRepositorio
         //    $valor .= $key->qtde.',';
         // }
 
-        return '['. rtrim($valor,','). ']';
-
+        return '[' . rtrim($valor, ',') . ']';
     }
 
     public function ultimaAtualizacao()
@@ -94,7 +98,7 @@ class DashboardRepositorio
 
     public function lojaInformation($coluna)
     {
-       return $this->loja->where('cnpj_loja',session()->get('cnpj_loja'))->get([$coluna]);
+        return $this->loja->where('cnpj_loja', session()->get('cnpj_loja'))->get([$coluna]);
     }
 
     protected  function TotalMesses()
@@ -106,11 +110,11 @@ class DashboardRepositorio
         GROUP BY YEAR(data), MONTH(data);');
         $valor = '';
 
-        for ($i=0; $i <= 11 ; $i++) {
-            if(empty($busca[$i]->total)){
-                $valor .= '0'.',';
-            }else{
-                $valor .= $busca[$i]->total.',';
+        for ($i = 0; $i <= 11; $i++) {
+            if (empty($busca[$i]->total)) {
+                $valor .= '0' . ',';
+            } else {
+                $valor .= $busca[$i]->total . ',';
             }
         }
 
@@ -119,7 +123,6 @@ class DashboardRepositorio
         //    $valor .= $key->total.',';
         // }
 
-        return '['. rtrim($valor,','). ']';
-
+        return '[' . rtrim($valor, ',') . ']';
     }
 }
