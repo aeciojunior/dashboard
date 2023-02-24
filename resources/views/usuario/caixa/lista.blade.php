@@ -42,7 +42,7 @@
                 </div>
             </div>
         </div>
-        {{ request()->input('data_inicio') }}
+        @if (count($caixa) > 0)
         <form method="get" action="{{ route('user-busca-caixa') }}">
             <div class="card" style="margin-top: 100px;">
                 <div class="card-header pb-0 p-3">
@@ -83,6 +83,7 @@
                         <div class="form-group">
                             Codigo
                             <input type="text" class="form-control form-control-alternative" name="codigo_caixa"
+                            value="{{ request()->input('codigo_caixa')}}"
                                 id="exampleFormControlInput1" placeholder="sistema ou caixa ou operador">
                         </div>
                     </div>
@@ -194,7 +195,11 @@
                 {{-- {!! $caixa->links() !!} --}}
                 {{ $caixa->appends(['data_inicio' => request()->input('data_inicio'), 'data_fim' => request()->input('data_fim')])->links() }}
             </div>
-        </div>
+        </div>  
+        @else
+        <p style="margin-top:200px;" class="text-center justfy-content-center">Não existem registros para serem exbidos!
+        </p>
+        @endif
         @include('tamplate.footer')
     </div>
 

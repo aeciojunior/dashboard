@@ -22,14 +22,17 @@ class DashboardController extends Controller
 
     public function dashboard()
     {
-        //dd($this->dashboardRepositorio->ultimaAtualizacao());
+        
 
+      
         return view(
             $this->path . 'dashboard/dashboard',
             [
               
                 'meses' => $this->dashboardRepositorio->grafico()['meses'],
                 'valor' => $this->dashboardRepositorio->grafico()['valor'],
+                'vendas_diaria' => $this->dashboardRepositorio->vendaDiaria(),
+                'forma_pagamento' => $this->dashboardRepositorio->formasPagamentoDiario()
             ]
         );
     }
@@ -44,7 +47,7 @@ class DashboardController extends Controller
                 'nome' => $this->dashboardRepositorio->lojaInformation('nome_loja'),
                 'estoque' => $this->dashboardRepositorio->contadorEstoque(),
                 'venda' => $this->dashboardRepositorio->contadorTotalVendas(),
-                'caixa' => $this->dashboardRepositorio->contdorCaixa(),
+                'caixa' => $this->dashboardRepositorio->contadorCaixa(),
             ]
     );
     }

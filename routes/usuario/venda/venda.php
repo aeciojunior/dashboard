@@ -5,4 +5,5 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth')->controller(VendaController::class)->prefix('user')->group(function () {
     Route::get('/vendas','lista')->name('user-lista-vendas');
+    Route::get('/busca-venda','buscarVenda')->name('user-busca-venda');
 });

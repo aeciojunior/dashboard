@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Usuario\Estoque;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Estoque\EstoqueRequest;
 use App\Repositorio\Usuario\Estoque\EstoqueRepositorio;
 use Illuminate\Http\Request;
 
@@ -24,7 +25,8 @@ class EstoqueController extends Controller
     {
        return view($this->path.'.lista',['estoque' => $this->estoqueRepositorio->lista(),'contador'=>$this->estoqueRepositorio->contador()]);
     }
-    public function buscarProduto(Request $req)
+    
+    public function buscarProduto(EstoqueRequest $req)
     {
      
         if($busca = $this->estoqueRepositorio->buscarProduto($req->input('busca_produto'))){

@@ -6,14 +6,14 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class VendaRequest extends FormRequest
 {
-    /**
+   /**
      * Determine if the user is authorized to make this request.
      *
      * @return bool
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,8 +23,18 @@ class VendaRequest extends FormRequest
      */
     public function rules()
     {
+        $rules = [
+            "data_inicio" => "nullable|date",
+            "data_fim" => "nullable|date"
+        ];
+        return $rules;
+    }
+
+    public function messages()
+    {
         return [
-            //
+            "data_inicio.required" => "O campo inicio é obrigatório",
+            "data_fim.required" => "O campo fim é obrigatório"
         ];
     }
 }

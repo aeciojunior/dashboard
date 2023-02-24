@@ -13,7 +13,7 @@ class EstoqueRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,8 +23,16 @@ class EstoqueRequest extends FormRequest
      */
     public function rules()
     {
+        $rules = [
+            'busca_produto' => 'required'
+        ];
+        return $rules;
+    }
+
+    public function messages()
+    {
         return [
-            //
+          'busca_produto.required' => "O campo buscar produtos é obrigatorio"
         ];
     }
 }
