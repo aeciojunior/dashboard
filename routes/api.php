@@ -20,6 +20,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-
+Route::prefix('servidor')->withoutMiddleware("throttle:api")
+    ->middleware("throttle:300:1")->group(function () {
+        Route::get('/status',function(){
+            return response()->json(['service' => true]);
+        });
+    });
 
 require __DIR__.'/api/api-master.php';
