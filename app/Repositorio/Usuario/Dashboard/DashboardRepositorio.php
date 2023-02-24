@@ -40,19 +40,19 @@ class DashboardRepositorio
     {
 
         $this->db_conection($this->venda);
-        return $this->venda->whereYear('data',date('Y'))->sum('id');
+        return $this->venda->whereYear('data', date('Y'))->sum('id');
     }
 
     public function contadorCaixa()
     {
         $this->db_conection($this->caixa);
-        return $this->caixa->whereYear('data',date('Y'))->sum('valor');
+        return $this->caixa->whereYear('data', date('Y'))->sum('valor');
     }
     public function contadorTotalVendas()
     {
         $this->db_conection($this->venda);
         //date('Y-m-d')
-        return $this->venda->whereYear('data',date('Y') )->sum('total_nota');
+        return $this->venda->whereYear('data', date('Y'))->sum('total_nota');
     }
 
     public function grafico()
@@ -75,24 +75,33 @@ class DashboardRepositorio
         GROUP BY YEAR(data), MONTH(data);");
         $valor = '';
 
-        // for ($i = 0; $i <= 1; $i++) 
-        // {
-        //    if(isset($busca[$i]->mes)){
-        //      $valor[$i] = "". $busca[$i]->qtde ."";
-        //    }else{
-        //     $valor[$i] =  0;
-        //    }
-        // }
+        $format = [];
 
-        foreach($busca as $key)
-        {
-           $valor .= $key->qtde.',';
+        foreach ($busca as $item) {
+            $format[$item->mes] =
+                [
+                    "mes" => $item->mes,
+                    "qtde" => $item->qtde
+                ];
         }
 
-        dd($valor);
-       // return '[' . rtrim($valor, ',') . ']';
+
+        for ($i = 1; $i <= 12; $i++) {
+            $valor .= $this->calcular(isset($format[$i]['qtde']) ? $format[$i]['qtde'] : '') . ",";
+        }
+
+
+
+
+
+
+        return '[' . rtrim($valor, ',') . ']';
     }
 
+    protected function calcular($v)
+    {
+        return empty($v) ? 0 : $v;
+    }
     public function ultimaAtualizacao()
     {
         $this->db_conection($this->venda);
@@ -114,44 +123,49 @@ class DashboardRepositorio
         GROUP BY YEAR(data), MONTH(data);");
         $valor = '';
 
-        for ($i = 0; $i <= 11; $i++) {
-            if (empty($busca[$i]->total)) {
-                $valor .= '0' . ',';
-            } else {
-                $valor .= $busca[$i]->total . ',';
-            }
+       
+        $format = [];
+
+        foreach ($busca as $item) {
+            $format[$item->mes] =
+                [
+                    "mes" => $item->mes,
+                    "total" => $item->total
+                ];
         }
 
-        // foreach($busca as $key)
-        // {
-        //    $valor .= $key->total.',';
-        // }
 
-        
+        for ($i = 1; $i <= 12; $i++) {
+            $valor .= $this->calcular(isset($format[$i]['total']) ? $format[$i]['total'] : '') . ",";
+        }
+
+
+
         return '[' . rtrim($valor, ',') . ']';
     }
 
-    public function vendaDiaria(){
+    public function vendaDiaria()
+    {
         $data =  date('Y-m-d');
-        $busca =(object) [];
+        $busca = (object) [];
         $this->db_conection($this->venda);
-        $busca = $this->venda->whereBetween('data',["{$data} 00:00:00","{$data} 23:00:00"])->limit(10)->get();
-    
-        return  isset($busca) >0 ? (object) $busca : $busca;
+        $busca = $this->venda->whereBetween('data', ["{$data} 00:00:00", "{$data} 23:00:00"])->limit(10)->get();
+
+        return  isset($busca) > 0 ? (object) $busca : $busca;
     }
 
     public function formasPagamentoDiario()
     {
         $data =  date('Y-m-d');
-        $busca =(object) [];
+        $busca = (object) [];
         $this->db_conection($this->venda);
-      
+
         $busca = $this->db::connection('mysql2')->select("
         select 
         sum(meio_dinheiro) as meio_dinheiro,sum(meio_cartaodeb) as meio_cartaodeb,sum(meio_cartaocred) as meio_cartaocred,sum(meio_chequeav) as meio_chequeav,
         sum(meio_crediario) as meio_crediario,sum(meio_outros) as meio_outros,sum(meio_chequeap) as meio_chequeap,sum(meio_chequeav) as meio_chequeav,sum(meio_crediario) as meio_crediario
         from vendas
         WHERE data BETWEEN ('{$data} 00:00:00') AND ('{$data} 23:00:00');");
-         return  count($busca) >0 ? $busca :  false;
+        return  count($busca) > 0 ? $busca :  false;
     }
 }
