@@ -100,6 +100,10 @@
                     style: 'currency',
                     currency: 'BRL'
                 }));
+                $('#user-caixa-info-atual').text(data.caixaAtual.toLocaleString('pt-BR', {
+                    style: 'currency',
+                    currency: 'BRL'
+                }));
                 $('#user-estoque-info').text(data.estoque.toLocaleString('pt-BR', {
                     minimumFractionDigits: 2
                 }));

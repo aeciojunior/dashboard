@@ -153,8 +153,8 @@
                                         </td>
                                         <td class="align-middle text-sm">
                                             <div class="col text-center">
-                                                <p class="text-xs font-weight-bold mb-0">Valor</p>
-                                                <h6 class="text-sm mb-0">R$  {{ number_format($item->total, 2, ',', '.') }}</h6>
+                                                <p class="text-xs font-weight-bold mb-0">Valor Recebido</p>
+                                                <h6 class="text-sm mb-0">R$  {{ number_format($item->valor_recebido, 2, ',', '.') }}</h6>
                                             </div>
                                         </td>
                                         <td class="align-middle text-sm">
@@ -163,10 +163,11 @@
                                                 <h6 class="text-sm mb-0">R$  {{ number_format($item->desconto, 2, ',', '.') }}</h6>
                                             </div>
                                         </td>
+                                        
                                         <td class="align-middle text-sm">
                                             <div class="col text-center">
                                                 <p class="text-xs font-weight-bold mb-0">Total</p>
-                                                <h6 class="text-sm mb-0">R$  {{ number_format($item->total, 2, ',', '.') }}</h6>
+                                                <h6 class="text-sm mb-0">R$  {{ number_format($item->total_nota, 2, ',', '.') }}</h6>
                                             </div>
                                         </td>
                                     </tr>

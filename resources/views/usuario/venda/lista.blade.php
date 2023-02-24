@@ -81,10 +81,10 @@
 
                         <div class="col-md-12">
                             <div class="form-group">
-                                Codigo
+                                Codigo (busca sem intervalo)
                                 <input type="text" class="form-control form-control-alternative" name="codigo_venda"
                                     value="{{ request()->input('codigo_venda') }}" id="exampleFormControlInput1"
-                                    placeholder="codigo do sistema ou codigo da nota">
+                                    placeholder="codigos sistema ou caixa ou vendedor ou modelo nf">
                             </div>
                         </div>
 
@@ -110,20 +110,20 @@
                         <thead>
                             <tr>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Codigo</th>
-                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Codigo Nota
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                    Codigo caixa
                                 </th>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                    Codigo produto
+                                    Codigo vendedor</th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                    Numero</th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                    Emissão
                                 </th>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                    Quantidade
-                                </th>
-                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                    Valor unitario</th>
+                                    Modelo nf</th>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
                                     Total</th>
-                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                    Data</th>
                                 <th class="text-secondary opacity-7"></th>
                             </tr>
                         </thead>
@@ -142,39 +142,41 @@
                                             </div>
                                         </div>
                                     </td>
+                                
+                                   
                                     <td>
-                                        <p class="text-xs font-weight-bold mb-0">Codigo
-                                            nota</p>
-                                        <p class="text-xs text-secondary mb-0">{{ $item->codnota }}</p>
+                                        <p class="text-xs font-weight-bold mb-0">Codigo caixa</p>
+                                        <p class="text-xs text-secondary mb-0">{{ $item->codcaixa }}</p>
                                     </td>
                                     <td>
-                                        <p class="text-xs font-weight-bold mb-0">Codigo produto</p>
-                                        <p class="text-xs text-secondary mb-0">{{ $item->codproduto }}</p>
+                                        <p class="text-xs font-weight-bold mb-0">Codigo vendedor</p>
+                                        <p class="text-xs text-secondary mb-0">{{ $item->codvendedor }}</p>
                                     </td>
                                     <td>
-                                        <p class="text-xs font-weight-bold mb-0">Quantidade</p>
-                                        <p class="text-xs text-secondary mb-0">
-                                            {{ $item->qtde }}</p>
+                                        <p class="text-xs font-weight-bold mb-0">Numero</p>
+                                        <p class="text-xs text-secondary mb-0">{{ $item->numero }}</p>
                                     </td>
                                     <td>
-                                        <p class="text-xs font-weight-bold mb-0">Valor unitario</p>
-                                        <p class="text-xs text-secondary mb-0">
-                                           R$ {{ number_format($item->unitario, 2, ',', '.') }}</p>
-                                    </td>
-                                    <td>
-                                        <p class="text-xs font-weight-bold mb-0">Total</p>
-                                        <p class="text-xs text-secondary mb-0">
-                                          R$ {{ number_format($item->total, 2, ',', '.') }}</p>
-                                    </td>
-                                    {{-- <td class="align-middle text-center">
-                                    <span class="text-secondary text-xs font-weight-bold">23/04/18</span>
-                                </td> --}}
-                                    <td>
-                                        <p class="text-xs font-weight-bold mb-0">Data</p>
+                                        <p class="text-xs font-weight-bold mb-0">Emissão</p>
                                         <p class="text-xs text-secondary mb-0">
                                             {{ date('d/m/Y h:i:s', strtotime($item->data)) }}
                                         </p>
                                     </td>
+                                    <td>
+                                        <p class="text-xs font-weight-bold mb-0">Modelo nf</p>
+                                        <p class="text-xs text-secondary mb-0">{{ $item->modelo_nf }}</p>
+                                    </td>
+                                   
+                                    <td>
+                                        <p class="text-xs font-weight-bold mb-0">Total</p>
+                                        <p class="text-xs text-secondary mb-0">
+                                            R$ {{ number_format($item->total_nota, 2, ',', '.') }}</p>
+                                    </td>
+
+                                    {{-- <td class="align-middle text-center">
+                                    <span class="text-secondary text-xs font-weight-bold">23/04/18</span>
+                                </td> --}}
+
                                     <td class="align-middle">
                                         <a href="javascript:;" class="text-secondary font-weight-bold text-xs"
                                             data-toggle="tooltip" data-original-title="Edit user">
@@ -195,8 +197,8 @@
             <p style="margin-top:200px;" class="text-center justfy-content-center">Não existem regitros para serem
                 exbidos!
             </p>
-            @endif
-            @include('tamplate.footer')
+        @endif
+        @include('tamplate.footer')
     </div>
 
 @endsection

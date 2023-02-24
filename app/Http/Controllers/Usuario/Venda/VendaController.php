@@ -23,6 +23,7 @@ class VendaController extends Controller
     public function lista()
     {
 
+    
         return view($this->path . '.lista', ['venda' => $this->vendaRepositorio->lista()]);
     }
 

@@ -48,6 +48,11 @@ class DashboardRepositorio
         $this->db_conection($this->caixa);
         return $this->caixa->whereYear('data', date('Y'))->sum('valor');
     }
+    public function contadorCaixaAtual()
+    {
+        $this->db_conection($this->venda);
+        return $this->venda->whereYear('data', date('Y'))->sum('meio_dinheiro');
+    }
     public function contadorTotalVendas()
     {
         $this->db_conection($this->venda);
@@ -150,7 +155,7 @@ class DashboardRepositorio
         $busca = (object) [];
         $this->db_conection($this->venda);
         $busca = $this->venda->whereBetween('data', ["{$data} 00:00:00", "{$data} 23:00:00"])->limit(10)->get();
-
+       
         return  isset($busca) > 0 ? (object) $busca : $busca;
     }
 

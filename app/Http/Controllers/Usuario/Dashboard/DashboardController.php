@@ -48,6 +48,7 @@ class DashboardController extends Controller
                 'estoque' => $this->dashboardRepositorio->contadorEstoque(),
                 'venda' => $this->dashboardRepositorio->contadorTotalVendas(),
                 'caixa' => $this->dashboardRepositorio->contadorCaixa(),
+                'caixaAtual' => $this->dashboardRepositorio->contadorCaixaAtual()
             ]
     );
     }
