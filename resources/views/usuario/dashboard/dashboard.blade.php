@@ -153,8 +153,8 @@
                                         </td>
                                         <td class="align-middle text-sm">
                                             <div class="col text-center">
-                                                <p class="text-xs font-weight-bold mb-0">Valor Recebido</p>
-                                                <h6 class="text-sm mb-0">R$  {{ number_format($item->valor_recebido, 2, ',', '.') }}</h6>
+                                                <p class="text-xs font-weight-bold mb-0">Sub total</p>
+                                                <h6 class="text-sm mb-0">R$  {{ number_format($item->valor_produtos, 2, ',', '.') }}</h6>
                                             </div>
                                         </td>
                                         <td class="align-middle text-sm">
