@@ -64,6 +64,7 @@ class DashboardController extends Controller
                 'meses' => $this->dashboardRepositorio->grafico()['meses'],
                 'forma_pagamento' => $this->dashboardRepositorio->formasPagamentoDiario(),
                 'vendas_diaria' => $this->dashboardRepositorio->vendaDiaria(),
+                'total_diario' => $this->dashboardRepositorio->contadorValorTotalDiario(),
             ]
         );
     }

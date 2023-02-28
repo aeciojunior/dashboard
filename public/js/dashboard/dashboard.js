@@ -65,6 +65,11 @@ function nav_info(url) {
                     style: 'currency',
                     currency: 'BRL'
                 }));
+                $('#user-total-dia-info').text((data.total_diario ?? 0).toLocaleString('pt-BR', {
+                    // minimumFractionDigits: 2
+                    style: 'currency',
+                    currency: 'BRL'
+                }));
        
                 tabela(data.vendas_diaria)
                 graficoLinha(url, "chart-line-vendas-qtd", JSON.parse(data.meses),

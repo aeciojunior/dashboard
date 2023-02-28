@@ -48,12 +48,21 @@ class DashboardRepositorio
         $this->db_conection($this->caixa);
         return $this->caixa->whereYear('data', date('Y'))->sum('valor');
     }
+
     public function contadorCaixaAtual()
     {
         $this->db_conection($this->venda);
         $data =  date('Y-m-d');
         return $this->venda->whereBetween('data', ["{$data} 00:00:00", "{$data} 23:00:00"])->sum('meio_dinheiro');
     }
+
+    public function contadorValorTotalDiario()
+    {
+        $this->db_conection($this->venda);
+        $data =  date('Y-m-d');
+        return $this->venda->whereBetween('data', ["{$data} 00:00:00", "{$data} 23:00:00"])->sum('total_nota');
+    }
+
     public function contadorTotalVendas()
     {
         $this->db_conection($this->venda);
@@ -95,11 +104,6 @@ class DashboardRepositorio
         for ($i = 1; $i <= 12; $i++) {
             $valor .= $this->calcular(isset($format[$i]['qtde']) ? $format[$i]['qtde'] : '') . ",";
         }
-
-
-
-
-
 
         return '[' . rtrim($valor, ',') . ']';
     }
