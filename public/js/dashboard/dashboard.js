@@ -2,7 +2,7 @@ function nav_info(url) {
     setInterval(() => {
         $(document).ready(function () {
             $.get(url, function (data) {
-
+                 
                 $('#ultima-atualizacao').text('Ultima atualização ' + new Date(data.data).toLocaleString());
                 $('#nome-loja').text(data.nome[0].nome_loja);
                 $('#cnpj-loja').text(data.cnpj[0].cnpj_loja);

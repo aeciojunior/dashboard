@@ -1,3 +1,5 @@
+
+
 function graficoLinha(url, id, dados = '', label, tipo = '', prefix = '') {
 
     $(document).ready(function () {
@@ -122,7 +124,7 @@ function tabela($url) {
 
     $(document).ready(function () {
         $.get($url, function (data) {
-
+             
             var tabela = `  <div class="table-responsive">
             <table class="table align-items-center "> <tbody>`;
 
@@ -215,38 +217,38 @@ function formaPagamento($url) {
 
     $(document).ready(function () {
         $.get($url, function (data) {
-
-            $('#user-cred-info').text(data.forma_pagamento[0].meio_cartaocred.toLocaleString('pt-BR', {
+            
+            $('#user-cred-info').text((data.forma_pagamento[0].meio_cartaocred ??  0).toLocaleString('pt-BR', {
                 // minimumFractionDigits: 2
                 style: 'currency',
                 currency: 'BRL'
             }));
-            $('#user-dinheiro-info').text(data.forma_pagamento[0].meio_dinheiro.toLocaleString('pt-BR', {
+            $('#user-dinheiro-info').text((data.forma_pagamento[0].meio_dinheiro ?? 0).toLocaleString('pt-BR', {
                 // minimumFractionDigits: 2
                 style: 'currency',
                 currency: 'BRL'
             }));
-            $('#user-deb-info').text(data.forma_pagamento[0].meio_cartaodeb.toLocaleString('pt-BR', {
+            $('#user-deb-info').text((data.forma_pagamento[0].meio_cartaodeb ?? 0).toLocaleString('pt-BR', {
                 // minimumFractionDigits: 2
                 style: 'currency',
                 currency: 'BRL'
             }));
-            $('#user-pix-info').text(data.forma_pagamento[0].meio_outros.toLocaleString('pt-BR', {
+            $('#user-pix-info').text((data.forma_pagamento[0].meio_outros ?? 0).toLocaleString('pt-BR', {
                 // minimumFractionDigits: 2
                 style: 'currency',
                 currency: 'BRL'
             }));
-            $('#user-chequeav-info').text(data.forma_pagamento[0].meio_chequeav.toLocaleString('pt-BR', {
+            $('#user-chequeav-info').text((data.forma_pagamento[0].meio_chequeav ?? 0).toLocaleString('pt-BR', {
                 // minimumFractionDigits: 2
                 style: 'currency',
                 currency: 'BRL'
             }));
-            $('#user-chequeap-info').text(data.forma_pagamento[0].meio_chequeap.toLocaleString('pt-BR', {
+            $('#user-chequeap-info').text((data.forma_pagamento[0].meio_chequeap ?? 0).toLocaleString('pt-BR', {
                 // minimumFractionDigits: 2
                 style: 'currency',
                 currency: 'BRL'
             }));
-            $('#user-crediario-info').text(data.forma_pagamento[0].meio_crediario.toLocaleString('pt-BR', {
+            $('#user-crediario-info').text((data.forma_pagamento[0].meio_crediario ?? 0).toLocaleString('pt-BR', {
                 // minimumFractionDigits: 2
                 style: 'currency',
                 currency: 'BRL'
