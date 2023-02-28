@@ -51,7 +51,8 @@ class DashboardRepositorio
     public function contadorCaixaAtual()
     {
         $this->db_conection($this->venda);
-        return $this->venda->whereYear('data', date('Y'))->sum('meio_dinheiro');
+        $data =  date('Y-m-d');
+        return $this->venda->whereBetween('data', ["{$data} 00:00:00", "{$data} 23:00:00"])->sum('meio_dinheiro');
     }
     public function contadorTotalVendas()
     {
@@ -128,7 +129,7 @@ class DashboardRepositorio
         GROUP BY YEAR(data), MONTH(data);");
         $valor = '';
 
-       
+
         $format = [];
 
         foreach ($busca as $item) {
@@ -146,7 +147,7 @@ class DashboardRepositorio
 
 
 
-        return '[' . rtrim($valor, ',') . ']';
+        return  '[' .  rtrim($valor, ',') . ']';
     }
 
     public function vendaDiaria()
@@ -154,8 +155,8 @@ class DashboardRepositorio
         $data =  date('Y-m-d');
         $busca = (object) [];
         $this->db_conection($this->venda);
-        $busca = $this->venda->whereBetween('data', ["{$data} 00:00:00", "{$data} 23:00:00"])->limit(10)->get();
-       
+        $busca = $this->venda->whereBetween('data', ["{$data} 00:00:00", "{$data} 23:00:00"])->limit(10)->orderBy('data', 'desc')->get();
+
         return  isset($busca) > 0 ? (object) $busca : $busca;
     }
 
@@ -168,7 +169,7 @@ class DashboardRepositorio
         $busca = $this->db::connection('mysql2')->select("
         select 
         sum(meio_dinheiro) as meio_dinheiro,sum(meio_cartaodeb) as meio_cartaodeb,sum(meio_cartaocred) as meio_cartaocred,sum(meio_chequeav) as meio_chequeav,
-        sum(meio_crediario) as meio_crediario,sum(meio_outros) as meio_outros,sum(meio_chequeap) as meio_chequeap,sum(meio_chequeav) as meio_chequeav,sum(meio_crediario) as meio_crediario
+        sum(meio_crediario)  as meio_crediario, sum(meio_chequeap) as meio_chequeap, sum(meio_outros) as meio_outros,sum(meio_chequeap) as meio_chequeap,sum(meio_chequeav) as meio_chequeav,sum(meio_crediario) as meio_crediario
         from vendas
         WHERE data BETWEEN ('{$data} 00:00:00') AND ('{$data} 23:00:00');");
         return  count($busca) > 0 ? $busca :  false;

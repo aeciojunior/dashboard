@@ -46,8 +46,8 @@
        --}}
 
             <li class="nav-item dropdown pe-2 d-flex align-items-center">
-                <div href="javascript:;" style="cursor: default;" class="nav-link text-white p-0" id="dropdownMenuButton"
-                    data-bs-toggle="dropdown" aria-expanded="false">
+                <div href="javascript:;" style="cursor: default;" class="nav-link text-white p-0"
+                    id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                     Loja : <span id="nome-loja">
                         <div class="spinner-border tetx-white" role="status">
                             <span class="visually-hidden">Loading...</span>
@@ -57,8 +57,8 @@
             </li>
 
             <li class="nav-item dropdown pe-2 d-flex align-items-center">
-                <div href="javascript:;" style="cursor: default;" class="nav-link text-white p-0" id="dropdownMenuButton"
-                    data-bs-toggle="dropdown" aria-expanded="false">
+                <div href="javascript:;" style="cursor: default;" class="nav-link text-white p-0"
+                    id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                     CNPJ : <span id="cnpj-loja">
                         <div class="spinner-border" role="status">
                             <span class="visually-hidden">Loading...</span>
@@ -84,32 +84,3 @@
     </div>
 </nav>
 
-@push('javascript')
-    <script defer>
-        $(document).ready(function() {
-            $.get("{{ route('ultimo-update') }}", function(data) {
-
-                $('#ultima-atualizacao').text('Ultima atualização ' + new Date(data.data).toLocaleString());
-                $('#nome-loja').text(data.nome[0].nome_loja);
-                $('#cnpj-loja').text(data.cnpj[0].cnpj_loja);
-                $('#user-venda-info').text(data.venda.toLocaleString('pt-BR', {
-                    style: 'currency',
-                    currency: 'BRL'
-                }));
-                $('#user-caixa-info').text(data.caixa.toLocaleString('pt-BR', {
-                    style: 'currency',
-                    currency: 'BRL'
-                }));
-                $('#user-caixa-info-atual').text(data.caixaAtual.toLocaleString('pt-BR', {
-                    style: 'currency',
-                    currency: 'BRL'
-                }));
-                $('#user-estoque-info').text(data.estoque.toLocaleString('pt-BR', {
-                    minimumFractionDigits: 2
-                }));
-                console.log(data.estoque)
-
-            })
-        });
-    </script>
-@endpush

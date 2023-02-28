@@ -22,24 +22,35 @@ class DashboardController extends Controller
 
     public function dashboard()
     {
-        
 
-      
+
+
         return view(
             $this->path . 'dashboard/dashboard',
             [
-              
-                'meses' => $this->dashboardRepositorio->grafico()['meses'],
                 'valor' => $this->dashboardRepositorio->grafico()['valor'],
+                'meses' => $this->dashboardRepositorio->grafico()['meses'],
                 'vendas_diaria' => $this->dashboardRepositorio->vendaDiaria(),
                 'forma_pagamento' => $this->dashboardRepositorio->formasPagamentoDiario()
             ]
         );
     }
 
+    public function grafico()
+    {
+        return response(
+            [
+                'valor' => $this->dashboardRepositorio->grafico()['valor'],
+                'meses' => $this->dashboardRepositorio->grafico()['meses'],
+                'forma_pagamento' => $this->dashboardRepositorio->formasPagamentoDiario(),
+                'vendas_diaria' => $this->dashboardRepositorio->vendaDiaria(),
+            ]
+        );
+    }
+
     public function ultimaAutalizacao()
     {
-        
+
         return response(
             [
                 'data' => $this->dashboardRepositorio->ultimaAtualizacao(),
@@ -48,8 +59,8 @@ class DashboardController extends Controller
                 'estoque' => $this->dashboardRepositorio->contadorEstoque(),
                 'venda' => $this->dashboardRepositorio->contadorTotalVendas(),
                 'caixa' => $this->dashboardRepositorio->contadorCaixa(),
-                'caixaAtual' => $this->dashboardRepositorio->contadorCaixaAtual()
+                'caixaAtual' => $this->dashboardRepositorio->contadorCaixaAtual(),
             ]
-    );
+        );
     }
 }

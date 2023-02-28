@@ -6,6 +6,12 @@
 <script src="{{ asset('js/plugins/chartjs.min.js') }}"></script>
 <script src="{{ asset('js/senha/exibir-senha.js') }}"></script>
 <script src="{{ asset('js/sweetalert.min.js')}}"></script>
+<script src="{{ asset('js/grafico/grafico.js') }}"></script>
+<script src="{{asset('js/dashboard/dashboard.js')}}"></script>
+<script defer>
+    nav_info("{{ route('user-ultimo-update') }}")
+    forma_pagamento("{{ route('user-grafico-info') }}")
+</script>
 
 
 <script>
