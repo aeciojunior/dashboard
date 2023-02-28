@@ -30,6 +30,48 @@ function nav_info(url) {
                     minimumFractionDigits: 2
                 }));
 
+                $('#user-cred-info').text((data.forma_pagamento[0].meio_cartaocred ??  0).toLocaleString('pt-BR', {
+                    // minimumFractionDigits: 2
+                    style: 'currency',
+                    currency: 'BRL'
+                }));
+                $('#user-dinheiro-info').text((data.forma_pagamento[0].meio_dinheiro ?? 0).toLocaleString('pt-BR', {
+                    // minimumFractionDigits: 2
+                    style: 'currency',
+                    currency: 'BRL'
+                }));
+                $('#user-deb-info').text((data.forma_pagamento[0].meio_cartaodeb ? data.forma_pagamento[0].meio_cartaodeb : 0).toLocaleString('pt-BR', {
+                    // minimumFractionDigits: 2
+                    style: 'currency',
+                    currency: 'BRL'
+                }));
+                $('#user-pix-info').text((data.forma_pagamento[0].meio_outros ?? 0).toLocaleString('pt-BR', {
+                    // minimumFractionDigits: 2
+                    style: 'currency',
+                    currency: 'BRL'
+                }));
+                $('#user-chequeav-info').text((data.forma_pagamento[0].meio_chequeav ?? 0).toLocaleString('pt-BR', {
+                    // minimumFractionDigits: 2
+                    style: 'currency',
+                    currency: 'BRL'
+                }));
+                $('#user-chequeap-info').text((data.forma_pagamento[0].meio_chequeap ?? 0).toLocaleString('pt-BR', {
+                    // minimumFractionDigits: 2
+                    style: 'currency',
+                    currency: 'BRL'
+                }));
+                $('#user-crediario-info').text((data.forma_pagamento[0].meio_crediario ?? 0).toLocaleString('pt-BR', {
+                    // minimumFractionDigits: 2
+                    style: 'currency',
+                    currency: 'BRL'
+                }));
+       
+                tabela(data.vendas_diaria)
+                graficoLinha(url, "chart-line-vendas-qtd", JSON.parse(data.meses),
+                'Vendas', 'Vendas');
+                 graficoLinha(url, "chart-line-vendas-valor", JSON.parse(data.valor),
+                'Vendas', 'Valor',
+                'R$')
             })
 
         });
@@ -37,13 +79,3 @@ function nav_info(url) {
 
 }
 
-
-function forma_pagamento(url) {
-    graficoLinha(url, "chart-line-vendas-qtd", '',
-        'Vendas', 'Vendas');
-    graficoLinha(url, "chart-line-vendas-valor", '',
-        'Vendas', 'Valor',
-        'R$')
-    formaPagamento(url)
-    tabela(url)
-}

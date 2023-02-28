@@ -122,7 +122,6 @@
                         </div>
                     </div>
 
-                    @if (count($vendas_diaria) > 0)
                         <div id="user-info-tb-vendas">
                             <span>
                                 <div class="spinner-border" role="status">
@@ -130,11 +129,9 @@
                                 </div>
                             </span>
                         </div>
-                    @else
-                        <p style="margin-top:100px;" class="text-center justfy-content-center">Não existem regitros para
-                            serem exbidos!
-                        </p>
-                    @endif
+                    
+                        
+                  
                 </div>
             </div>
             {{-- card com as formas de pagamento --}}
@@ -286,6 +283,4 @@
         @include('tamplate.footer')
     </div>
 @endsection
-@push('javascript')
-    
-@endpush
+

@@ -60,6 +60,10 @@ class DashboardController extends Controller
                 'venda' => $this->dashboardRepositorio->contadorTotalVendas(),
                 'caixa' => $this->dashboardRepositorio->contadorCaixa(),
                 'caixaAtual' => $this->dashboardRepositorio->contadorCaixaAtual(),
+                'valor' => $this->dashboardRepositorio->grafico()['valor'],
+                'meses' => $this->dashboardRepositorio->grafico()['meses'],
+                'forma_pagamento' => $this->dashboardRepositorio->formasPagamentoDiario(),
+                'vendas_diaria' => $this->dashboardRepositorio->vendaDiaria(),
             ]
         );
     }
