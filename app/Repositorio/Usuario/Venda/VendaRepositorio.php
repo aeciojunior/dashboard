@@ -30,7 +30,7 @@ class VendaRepositorio
     public function lista()
     {
         $this->db_conection();
-        return $this->venda->orderBy('id', 'ASC')->paginate(9);
+        return $this->venda->orderBy('codigo', 'desc')->paginate(9);
     }
 
     public function buscarVenda($inicio, $fim, $codigo = '')

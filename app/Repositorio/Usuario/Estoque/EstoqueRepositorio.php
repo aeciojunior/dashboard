@@ -25,7 +25,7 @@ class EstoqueRepositorio
     public function lista()
     {
         $this->db_conection();
-        return $this->estoque->orderBy('id', 'DESC')->paginate(9);
+        return $this->estoque->orderBy('codigo', 'DESC')->paginate(9);
     }
     public function contador(){
         $this->db_conection();

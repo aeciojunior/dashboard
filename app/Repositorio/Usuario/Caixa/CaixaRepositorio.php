@@ -31,7 +31,7 @@ class CaixaRepositorio
     public function lista()
     {
         $this->db_conection();
-        return $this->caixa->orderBy('data', 'desc')->paginate(9);
+        return $this->caixa->orderBy('codigo', 'desc')->paginate(9);
     }
 
     public function buscaCaixa($inicio, $fim, $codigo = '')
