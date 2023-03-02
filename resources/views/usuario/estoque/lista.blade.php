@@ -54,7 +54,7 @@
                         <div class="form-group">
                             <div class="input-group input-group-alternative mb-3">
                                 <input class="form-control form-control-alternative" name="busca_produto"
-                                    value="{{ request()->input('busca_produto') }}" placeholder="Codigo ou nome do produto"
+                                    value="{{ request()->input('busca_produto') ?? old('busca_produto') }}" placeholder="Codigo ou nome do produto"
                                     type="text">
                                   
                             </div>

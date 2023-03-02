@@ -86,7 +86,7 @@
                                 <div class="form-group">
                                     Inicio
                                     <input class="form-control form-control-alternative" type="date" name="data_inicio"
-                                        value="{{ old('data_inicio') }}" id="example-date-input">
+                                        value="{{ request()->input('data_inicio') ?? old('data_inicio') }}" id="example-date-input">
                                     @error('data_inicio')
                                         <div class="error" style="color:red">{{ $message }}</div>
                                     @enderror
@@ -97,7 +97,7 @@
                                     Fim
 
                                     <input class="form-control form-control-alternative" type="date" name="data_fim"
-                                        value="{{ old('data_fim') }}" id="example-date-input">
+                                        value="{{ request()->input('data_fim') ?? old('data_fim')  }}" id="example-date-input">
                                     @error('data_fim')
                                         <div class="error " style="color:red">{{ $message }}</div>
                                     @enderror
@@ -111,7 +111,7 @@
                             <div class="form-group">
                                 Codigo (busca sem intervalo)
                                 <input type="text" class="form-control form-control-alternative" name="codigo_caixa"
-                                    value="{{ request()->input('codigo_caixa') }}" id="exampleFormControlInput1"
+                                    value="{{ request()->input('codigo_caixa') ?? old('codigo_caixa') }}" id="exampleFormControlInput1"
                                     placeholder="sistema ou caixa ou operador">
                             </div>
                         </div>
