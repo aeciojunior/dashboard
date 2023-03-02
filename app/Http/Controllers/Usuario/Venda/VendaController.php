@@ -35,4 +35,12 @@ class VendaController extends Controller
         }
         return redirect()->route('user-lista-vendas')->with('msg-error','Não foram encontrados registros!')->withInput();
     }
+
+    public function detalhesVenda($id)
+    {
+        if ($busca =  $this->vendaRepositorio->buscaVendaID($id)) {
+            return view($this->path . '.detalhes', ['venda' => $busca]);
+        }
+        return redirect()->route('user-lista-vendas')->with('msg-error', 'Não foram encontrados registros durante esse periodo!')->withInput();
+    }
 }

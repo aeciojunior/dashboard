@@ -178,7 +178,7 @@
                                 </td> --}}
 
                                     <td class="align-middle">
-                                        <a href="javascript:;" class="text-secondary font-weight-bold text-xs"
+                                        <a href="{{route('user-detalhes-venda',$item->id)}}" class="text-secondary font-weight-bold text-xs"
                                             data-toggle="tooltip" data-original-title="Edit user">
                                             Detalhes
                                         </a>

@@ -31,11 +31,18 @@ class CaixaController extends Controller
     public function buscarCaixa(CaixaRequest $req)
     {
 
-      
-        if($busca =  $this->caixaRepositorio->buscaCaixa($req->input('data_inicio'), $req->input('data_fim'),$req->input('codigo_caixa'))){
-            return view($this->path . '.lista', ['caixa' => $busca, 'contador' => 0]);
+
+        if ($busca =  $this->caixaRepositorio->buscaCaixa($req->input('data_inicio'), $req->input('data_fim'), $req->input('codigo_caixa'))) {
+            return view($this->path . '.lista', ['caixa' => $busca]);
         }
         return redirect()->route('user-lista-caixa')->with('msg-error', 'Não foram encontrados registros durante esse periodo!')->withInput();
+    }
 
+    public function detalhesCaixa($id)
+    {
+        if ($busca =  $this->caixaRepositorio->buscaCaixaID($id)) {
+            return view($this->path . '.detalhes', ['caixa' => $busca]);
+        }
+        return redirect()->route('user-lista-caixa')->with('msg-error', 'Não foram encontrados registros durante esse periodo!')->withInput();
     }
 }

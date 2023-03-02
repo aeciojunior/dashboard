@@ -51,4 +51,17 @@ class VendaRepositorio
 
         return  count($busca) > 0 ? $busca :  false;
     }
+
+    public function buscaVendaID($id)
+    {
+        $busca = '';
+
+        $this->db_conection();
+        if (!empty($id)) {
+            $busca = $this->venda->where('id', $id)
+                ->get()->first();
+        }
+
+        return  !empty($busca) ? $busca :  false;
+    }
 }

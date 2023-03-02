@@ -20,6 +20,7 @@ class TabelaEstoque
             id bigint not null auto_increment primary key,
             created_at timestamp default current_timestamp,
             codigo varchar(100),
+            codgrupo varchar(100),
             codigobarra varchar(200),
             produto varchar(200),
             data_ultimacompra timestamp default current_timestamp,

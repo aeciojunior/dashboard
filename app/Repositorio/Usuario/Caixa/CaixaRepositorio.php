@@ -49,4 +49,17 @@ class CaixaRepositorio
 
         return  count($busca) > 0 ? $busca :  false;
     }
+
+    public function buscaCaixaID($id)
+    {
+        $busca = '';
+
+        $this->db_conection();
+        if (!empty($id)) {
+            $busca = $this->caixa->where('id', $id)
+                ->get()->first();
+        }
+
+        return  !empty($busca) ? $busca :  false;
+    }
 }
