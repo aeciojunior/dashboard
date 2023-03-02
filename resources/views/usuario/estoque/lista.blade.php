@@ -152,7 +152,7 @@
                                     <span class="text-secondary text-xs font-weight-bold">23/04/18</span>
                                 </td> --}}
                                     <td class="align-middle">
-                                        <a href="javascript:;" class="text-secondary font-weight-bold text-xs"
+                                        <a href="{{ route('user-datalhes-produto',$item->id)}}" class="text-secondary font-weight-bold text-xs"
                                             data-toggle="tooltip" data-original-title="Edit user">
                                             Detalhes
                                         </a>
