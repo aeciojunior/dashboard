@@ -21,7 +21,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::prefix('servidor')->withoutMiddleware("throttle:api")
-    ->middleware("throttle:300:1")->group(function () {
+    ->middleware("throttle:1000:1")->group(function () {
         Route::get('/status',function(){
             return response()->json(['service' => true]);
         });

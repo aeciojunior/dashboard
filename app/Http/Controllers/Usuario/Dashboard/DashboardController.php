@@ -24,7 +24,7 @@ class DashboardController extends Controller
     {
 
 
-
+      //  var_dump($this->dashboardRepositorio->formasPagamentoDiario());die();
         return view(
             $this->path . 'dashboard/dashboard',
             [
@@ -50,6 +50,7 @@ class DashboardController extends Controller
 
     public function ultimaAutalizacao()
     {
+        
 
         return response(
             [
