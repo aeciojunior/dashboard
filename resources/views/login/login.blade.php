@@ -12,29 +12,37 @@
                                 <p class="mb-0">Entre com sua senha e CNPJ ou CPF</p>
                             </div>
                             <div class="card-body">
-                                <form role="form" action="{{ route('login-post')}}" method="POST">
+                                <form role="form" action="{{ route('login-post') }}" method="POST">
                                     @csrf
                                     <div class="mb-3">
-                                        <input type="text" class="form-control form-control-lg" name="cnpj" id="documento" placeholder="CNPJ ou CPF"
-                                            aria-label="text">
+                                        <input type="text" class="form-control form-control-lg" name="cnpj"
+                                            id="documento" placeholder="CNPJ ou CPF" aria-label="text">
+                                        @error('cnpj')
+                                            <span style="color: red">{{ $message }}</span>
+                                        @enderror
                                     </div>
+
                                     <div class="mb-3">
-                                        <input type="password" name="password" id="password" class="form-control form-control-lg" placeholder="Senha"
-                                            aria-label="Password">
+                                        <input type="password" name="password" id="password"
+                                            class="form-control form-control-lg" placeholder="Senha" aria-label="Password">
+                                            @error('password')
+                                        <span style="color: red">{{ $message }}</span>
+                                    @enderror
                                     </div>
                                     <div class="form-check form-switch">
                                         <input class="form-check-input" name="remember" type="checkbox" id="rememberMe">
                                         <label class="form-check-label" for="rememberMe">Manter logado</label>
                                         <div style="margin-left: 56px;">
-                                            <input class="form-check-input" type="checkbox"  onclick="checado(this);" id="senhaShow">
+                                            <input class="form-check-input" type="checkbox" onclick="checado(this);"
+                                                id="senhaShow">
                                             <label class="form-check-label" for="senhaShow">Exibir Senha</label>
                                         </div>
 
                                     </div>
 
                                     <div class="text-center">
-                                        <button type="button"
-                                            class="btn btn-lg btn-primary btn-lg w-100 mt-4 mb-0" id="submit-form" onclick="submit(this);">Entrar</button>
+                                        <button type="button" class="btn btn-lg btn-primary btn-lg w-100 mt-4 mb-0"
+                                            id="submit-form" onclick="submit(this);">Entrar</button>
                                     </div>
                                 </form>
                             </div>
@@ -50,7 +58,7 @@
                     <div
                         class="col-6 d-lg-flex d-none h-100 my-auto pe-0 position-absolute top-0 end-0 text-center justify-content-center flex-column">
                         <div class="position-relative  h-100 m-3 px-7 border-radius-lg d-flex flex-column justify-content-center overflow-hidden"
-                            style="background-image: url('{{asset('img/img-login.jpeg')}}');
+                            style="background-image: url('{{ asset('img/img-login.jpeg') }}');
         background-size: cover;">
                             {{-- <span class="mask  opacity-6"></span>
                             <h4 class="mt-5 text-white font-weight-bolder position-relative">"Orbita tecnologia"</h4>
@@ -62,4 +70,3 @@
         </div>
     </section>
 @endsection
-

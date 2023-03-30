@@ -32,7 +32,7 @@ class LoginRequest extends FormRequest
     public function messages()
     {
         return [
-            'cnpj.required' => 'O campo email é obrigatorio!',
+            'cnpj.required' => 'O campo  cnpj ou email é obrigatorio!',
             'password.required' => 'O campo senha é obrigatorio!'
         ];
     }

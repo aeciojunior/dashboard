@@ -16,6 +16,7 @@ class LoginRepositorio
 
     public function loginIn($login)
     {
+        $login['cnpj'] = str_replace('-','',str_replace('/','',str_replace('.','',$login['cnpj'])));
         if (Auth::attempt(['cnpj' => $login['cnpj'], 'password' => $login['password']], $login['remember'] ?? false)) {
             return true;
         }
